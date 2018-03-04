@@ -34,11 +34,6 @@ def get_config(map_size):
     zoneB = ((int(map_size -1 - map_size//5), int(map_size//2 - map_size//10)), (map_size-1, int(map_size//2 + map_size//10)))
     
     cfg.add_reward_rule(gw.Event(b, 'in', zoneA), receiver=[b, a], value=[1, -1])
-    #cfg.add_reward_rule(gw.Event(b, 'in', zoneA), receiver=a, value=-1)
-    
     cfg.add_reward_rule(gw.Event(a, 'in', zoneB), receiver=[a, b], value=[1, -1])
-    #cfg.add_reward_rule(gw.Event(a, 'in', zoneB), receiver=b, value=-1)
-    
-    #cfg.add_reward_rule(gw.Event(a, 'attack', b).__and__(gw.Event(b, 'attack', a)), receiver=b, value=-1)
     
     return cfg

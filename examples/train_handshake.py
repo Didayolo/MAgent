@@ -2,17 +2,13 @@
 Train a single model by self-play
 """
 
-
 import argparse
 import time
 import os
 import logging as log
 import math
-
 import numpy as np
-
 import magent
-
 
 
 def play_a_round(env, map_size, handles, models, print_every, train=True, render=False, eps=None):
@@ -156,7 +152,7 @@ if __name__ == "__main__":
     models.append(models[0])
 
     # load if
-    savedir = 'save_model'
+    savedir = 'save_model/handshake'
     if args.load_from is not None:
         start_from = args.load_from
         print("load ... %d" % start_from)

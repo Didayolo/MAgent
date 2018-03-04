@@ -2,7 +2,6 @@
 
 import magent
 
-
 def get_config(map_size):
     gw = magent.gridworld
     cfg = gw.Config()
@@ -23,7 +22,6 @@ def get_config(map_size):
     g0 = cfg.add_group(small)
     g1 = cfg.add_group(small)
     g2 = cfg.add_group(small)
-
 
     a = gw.AgentSymbol(g0, index='any')
     b = gw.AgentSymbol(g1, index='any')

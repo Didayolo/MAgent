@@ -9,7 +9,6 @@ def get_config(map_size):
 
     cfg.set({"map_width": map_size, "map_height": map_size})
     cfg.set({"minimap_mode": True})
-    #cfg.set({"embedding_size": 10})
          
     agent = cfg.register_agent_type(
         name="agent",
@@ -23,7 +22,7 @@ def get_config(map_size):
 
     a = gw.AgentSymbol(g0, index='any')
 
-    # reward shaping to encourage attack
+    # reward shaping to penalize attack
     cfg.add_reward_rule(gw.Event(a, 'attack', a), receiver=a, value=-0.5)
     # end zone
     cfg.add_reward_rule(gw.Event(a, 'in', ((87, 47), (96, 73))), receiver=a, value=0.5)

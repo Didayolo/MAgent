@@ -24,7 +24,7 @@ def get_config(map_size):
 
     a = gw.AgentSymbol(g0, index='any')
 
-    # reward shaping to encourage attack
+    # reward shaping to encourage interaction
     cfg.add_reward_rule(gw.Event(a, 'attack', a), receiver=a, value=0.5)
     
 

@@ -1,23 +1,18 @@
 """
 Train a single model by self-play
 """
-
-
 import argparse
 import time
 import os
 import logging as log
 import math
-
 import numpy as np
-
 import magent
 
 
 def generate_map(env, map_size, handles):
     center_x, center_y = map_size // 2, map_size // 2
     
-    #####
     pos = []
     
     def add_full_square(pos, startx, starty, endx, endy, step=1):
@@ -26,7 +21,7 @@ def generate_map(env, map_size, handles):
                 pos.append([i,j])
                 
     add_full_square(pos, 0, 0, 19, 38)
-    add_full_square(pos, 19, 0, 35, 64)#19, 64)
+    add_full_square(pos, 19, 0, 35, 64)
     add_full_square(pos, 35, 0, 80, 40)
     
     add_full_square(pos, 43, 47, 65, 71)
@@ -35,7 +30,6 @@ def generate_map(env, map_size, handles):
     add_full_square(pos, 70, 58, 80, 75)
     
     add_full_square(pos, 19, 80, 80, 99)
-    
     
     env.add_walls(pos=pos, method="custom")
     
@@ -51,10 +45,6 @@ def play_a_round(env, map_size, handles, models, print_every, train=True, render
     env.reset()
     
     generate_map(env, map_size, handles)
-    
-    #init_num = map_size * map_size * 0.015
-    
-    #env.add_agents(handles[0], method="random", n=init_num)
 
     step_ct = 0
     done = False
@@ -133,7 +123,7 @@ if __name__ == "__main__":
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--load_from", type=int)
     parser.add_argument("--train", action="store_true")
-    parser.add_argument("--map_size", type=int, default=100)
+    #parser.add_argument("--map_size", type=int, default=100)
     parser.add_argument("--greedy", action="store_true")
     parser.add_argument("--name", type=str, default="flow")
     parser.add_argument("--eval", action="store_true")

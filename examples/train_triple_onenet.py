@@ -37,7 +37,7 @@ def generate_map(env, map_size, handles):
         items = [0,1,2]
         random.shuffle(items)
         
-        #Top left
+        # Top left
         pos = []
         n = init_num
         side = int(math.sqrt(n)) * 2
@@ -46,8 +46,10 @@ def generate_map(env, map_size, handles):
         for x in range(width//2 - gap - side, width//2 - gap - side + side, 2):
             for y in range((height - side)//2, (height - side)//2 + side//2, 2): 
                 pos.append([x, y, 0])
+        
         env.add_agents(handles[items[0]], method="custom", pos=pos)
         
+        # Top right
         pos = []
         for x in range(width//2 + gap, width//2 + gap + side, 2):
             for y in range((height - side)//2, (height - side)//2 + side//2, 2):
@@ -55,48 +57,13 @@ def generate_map(env, map_size, handles):
             
         env.add_agents(handles[items[1]], method="custom", pos=pos)
         
-        #env.add_agents(handles[items[0]], method="custom", pos=[[10,10,0]])
-        #env.add_agents(handles[items[1]], method="custom", pos=[[100,10,0]])
-        pos =[]
-        for x in range(width//2 - side//2, width//2 +side//2, 2):
+        # Bottom middle
+        pos = []
+        for x in range(width//2 - side//2, width//2 + side//2, 2):
             for y in range((height - side)//2 + ((height - side)//2 + side - (height - side)//2)//2 , (height - side)//2 + side, 2):
                 pos.append([x, y, 0])
         
-        
-        """
-        for x in range(width//2 - gap - side+width//4- 2*gap, width//2 - gap - side + side+width//4- 2*gap, 2):
-            for y in range((height - side)//2 + ((height - side)//2 + side - (height - side)//2)//2 , (height - side)//2 + side, 2):
-                pos.append([x, y, 0])"""
-        
         env.add_agents(handles[items[2]], method="custom", pos=pos)
-    """
-    # left
-    n = init_num
-    side = int(math.sqrt(n)) * 2
-    pos = []
-    for x in range(width//2 - gap - side, width//2 - gap - side + side, 2):
-        for y in range((height - side)//2, (height - side)//2 + side, 2):
-            pos.append([x, y, 0])
-    env.add_agents(handles[0], method="custom", pos=pos)
-
-    # right
-    n = init_num
-    side = int(math.sqrt(n)) * 2
-    pos = []
-    for x in range(width//2 + gap, width//2 + gap + side, 2):
-        for y in range((height - side)//2, (height - side)//2 + side, 2):
-            pos.append([x, y, 0])
-    env.add_agents(handles[1], method="custom", pos=pos)
-
-    # up
-    n = init_num
-    side = int(math.sqrt(n)) * 2
-    pos = []
-    for x in range(width//2 + gap, width//2 + gap + side, 2):
-        for y in range((height - side)//2, (height - side)//2 + side, 2):
-            pos.append([x, y, 0])
-    env.add_agents(handles[2], method="custom", pos=pos)
-    """
 
 def play_a_round(env, map_size, handles, models, print_every, train=True, render=False, eps=None):
     env.reset()
@@ -106,8 +73,6 @@ def play_a_round(env, map_size, handles, models, print_every, train=True, render
     done = False
 
     n = len(handles)
-    print("GAME")
-    print(len(handles))
     obs  = [[] for _ in range(n)]
     ids  = [[] for _ in range(n)]
     acts = [[] for _ in range(n)]
@@ -197,7 +162,7 @@ if __name__ == "__main__":
 
     # init the game
     env = magent.GridWorld("triple_battle", map_size=args.map_size) #ca c'est bien
-    env.set_render_dir("build/render")
+    env.set_render_dir("build/render/triple_battle")
 
     # two groups of agents
     names = [args.name + "-l", args.name + "-r"]
@@ -237,10 +202,10 @@ if __name__ == "__main__":
         raise NotImplementedError
 
     models.append(models[0])
-    models.append(models[0]) #####bidouille
+    models.append(models[0])
     
     # load if
-    savedir = 'save_model'
+    savedir = 'save_model/triple_battle'
     if args.load_from is not None:
         start_from = args.load_from
         print("load ... %d" % start_from)

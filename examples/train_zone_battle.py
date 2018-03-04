@@ -2,17 +2,13 @@
 Train a single model by self-play
 """
 
-
 import argparse
 import time
 import os
 import logging as log
 import math
-
 import numpy as np
-
 import magent
-
 
 
 def generate_map(env, map_size, handles):
@@ -21,17 +17,17 @@ def generate_map(env, map_size, handles):
     init_num = map_size * map_size * 0.02
     gap = 3
 
-    # left
+    # Left
     n = init_num
     side = int(math.sqrt(n)) * 2
     pos = []
     for x in range(width//2 - gap - side, width//2 - gap - side + side, 2):
         for y in range((height - side)//2, (height - side)//2 + side, 2):
             pos.append([x, y, 0])
-    #pos.append([80, 50, 0])
+
     env.add_agents(handles[0], method="custom", pos=pos)
 
-    # right
+    # Right
     n = init_num
     side = int(math.sqrt(n)) * 2
     pos = []
@@ -138,7 +134,7 @@ if __name__ == "__main__":
 
     # init the game
     env = magent.GridWorld("zone_battle", map_size=args.map_size)
-    env.set_render_dir("build/render/zone")
+    env.set_render_dir("build/render/zone_battle")
 
     # two groups of agents
     names = [args.name + "-l", args.name + "-r"]
@@ -180,7 +176,7 @@ if __name__ == "__main__":
     models.append(models[0])
 
     # load if
-    savedir = 'save_model/zone'
+    savedir = 'save_model/zone_battle'
     if args.load_from is not None:
         start_from = args.load_from
         print("load ... %d" % start_from)
