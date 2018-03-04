@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
     # init the game
     env = magent.GridWorld("zone_battle", map_size=args.map_size)
-    env.set_render_dir("build/render")
+    env.set_render_dir("build/render/zone")
 
     # two groups of agents
     names = [args.name + "-l", args.name + "-r"]
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     models.append(models[0])
 
     # load if
-    savedir = 'save_model'
+    savedir = 'save_model/zone'
     if args.load_from is not None:
         start_from = args.load_from
         print("load ... %d" % start_from)
